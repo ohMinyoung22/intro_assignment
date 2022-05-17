@@ -2,9 +2,9 @@
 
 {% block content %}
 
-<a href="{% url 'showpage' %}">Next Page</a>
+<a href="{% url 'main:showpage' %}">Next Page</a>
 
-<h2><a href="{%url 'new'%}">글쓰기</a></h2>
+<h2><a href="{%url 'main:new'%}">글쓰기</a></h2>
 
 <h1>글 목록</h1>
 {% for post in posts %}
@@ -12,7 +12,7 @@
     <h3>{{post.title}}</h3>
     {{post.writer}}<br>
     {{post.summary}} <br>
-    <a href="{%url 'detail' post.id %}">...자세히</a>
+    <a href="{%url 'main:detail' post.id %}">...자세히</a>
 </div>
 {% endfor %}
 
