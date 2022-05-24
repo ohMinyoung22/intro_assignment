@@ -6,6 +6,7 @@
 
 <h2><a href="{%url 'main:new'%}">글쓰기</a></h2>
 
+{% if user.is_authenticated %}
 <h1>글 목록</h1>
 {% for post in posts %}
 <div>
@@ -15,6 +16,11 @@
     <a href="{%url 'main:detail' post.id %}">...자세히</a>
 </div>
 {% endfor %}
+
+{% else %}
+<a href="{% url 'account_login' %}" class="btn btn-warning">로그인</a>
+<a href="{% url 'account_signup' %}" class="btn btn-warning">회원가입</a>
+{% endif %}
 
 <div class="card">
     <div class="card-body">
