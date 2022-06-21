@@ -21,8 +21,11 @@
 {% endif %}
 
 <p>{{post.body}}</p>
+
+{% if user.is_authenticated %}
 <a href="{%url 'main:edit' post.id%}">수정하기</a>
 <a href="{%url 'main:delete' post.id%}">삭제하기</a>
+{% endif %}
 
 <hr>
 
@@ -37,12 +40,19 @@
 <hr>
 <div>
     {% for comment in comments %}
-        <div>
-            작성자 : {{comment.writer}}
-            {{comment.content}}
-            <br>
-            <hr>
-        </div>
+    <div>
+        작성자 : {{comment.writer}}
+        {{comment.content}}
+
+        {% if user.is_authenticated %}
+            {% if 'user' in comment.writer.username %}
+                <a href="{% url 'main:delete_comment' comment.id %}">삭제하기</a>
+                <a href="{% url 'main:edit_comment' comment.id %}">수정하기</a>
+            {% endif %}
+        {% endif %}
+        <br>
+        <hr>
+    </div>
     {% endfor %}
 </div>
 
