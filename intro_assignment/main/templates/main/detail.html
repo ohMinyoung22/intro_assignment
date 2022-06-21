@@ -45,7 +45,7 @@
         {{comment.content}}
 
         {% if user.is_authenticated %}
-            {% if 'user' in comment.writer.username %}
+            {% if user.username == comment.writer.username %}
                 <a href="{% url 'main:delete_comment' comment.id %}">삭제하기</a>
                 <a href="{% url 'main:edit_comment' comment.id %}">수정하기</a>
             {% endif %}
