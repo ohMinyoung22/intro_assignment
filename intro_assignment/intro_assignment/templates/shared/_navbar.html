@@ -16,6 +16,7 @@
                         {% if user.is_authenticated %}
                         <li><a class="dropdown-item" href="{% url 'account_logout' %}">로그아웃</a></li>
                         <li><a class="dropdown-item" href="{% url 'users:mypage' %}">마이페이지</a></li>
+                        <li><a class="dropdown-item" href="{% url 'main:my_like' request.user.id  %}">내 좋아요 목록</a></li>
                         {% else %}
                         <li><a class="dropdown-item" href="{% url 'account_login' %}">로그인</a></li>
                         <li><a class="dropdown-item" href="{% url 'account_signup' %}">회원가입</a></li>
