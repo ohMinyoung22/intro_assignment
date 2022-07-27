@@ -17,4 +17,4 @@ def follow(request, user_id):
         user.profile.followings.remove(followed_user.profile)
     else:
         user.profile.followings.add(followed_user.profile)
-    return redirect('user:mypage', followed_user.id)
+    return redirect('users:mypage', followed_user.id)
