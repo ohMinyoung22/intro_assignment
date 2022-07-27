@@ -4,11 +4,12 @@
 {% block content %}
 <h1>{{post.title}}</h1>
 {% if post.writer %}
+<a href="{% url 'users:mypage' post.writer.id %}"></a>
     {% if 'user' in post.writer.username %}
-        <h3>작성자 : {{post.writer.last_name}} {{post.writer.first_name}}</h3>
+        <h3>작성자 : <a href="{% url 'users:mypage' post.writer.id %}">{{post.writer.last_name}} {{post.writer.first_name}}</a></h3>
 
     {% else %}
-        <h3>작성자 : {{post.writer}}</h3>
+        <h3>작성자 : <a href="{% url 'users:mypage' post.writer.id %}">{{post.writer}}</a></h3>
     {% endif %}
 {% else %}
     <h3>작성자 : 알 수 없음</h3>
@@ -139,6 +140,7 @@
 
 <hr>
 
+{% if user.is_authenticated %}
 <div>
     <form action="{%url 'main:create_comment' post.id%}" method="POST">
         {%csrf_token%}
@@ -146,12 +148,13 @@
         <input type="submit" value="확인">
     </form>
 </div>
+{% endif %}
 
 <hr>
 <div>
     {% for comment in comments %}
     <div>
-        작성자 : {{comment.writer}}
+        작성자 : <a href="{% url 'users:mypage' post.writer.id %}">{{comment.writer}}</a>
         {{comment.content}}
 
         {% if user.is_authenticated %}
