@@ -6,7 +6,13 @@ from django.contrib.auth.models import User
 def mypage(request, user_id):
     user = get_object_or_404(User, pk = user_id)
     posts = Post.objects.filter(writer=user)
-    return render(request, 'users/mypage.html', {'posts' : posts, 'user': user})
+    
+    return render(request, 'users/mypage.html',
+    {'posts' : posts, 
+    'user': user, 
+    'followings' : user.profile.followings.all(),
+    'followers' : user.profile.followers.all()
+    })
 
 def follow(request, user_id):
     user = request.user
